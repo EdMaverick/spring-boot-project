@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tables
+      author: Edgar
+      changes:
+        - createTable:
+            tableName: topic
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: comment
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: topic_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: comment
+            baseColumnNames: topic_id
+            constraintName: FK_topic_comment
+            referencedTableName: topic
+            referencedColumnNames: id
